@@ -4,32 +4,30 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
- 
- //return value is an array of childNodes
- 	var nodeArray = [];
- 	var wholeBody = document.body;
- 	//console.log(wholeBody.classList);
-  //document is everything
-  function getClassNames(element){
-  	console.log(element.childNodes)
-  	if(element.classList && element.classList.contains(className)){
-  		nodeArray.push(element);
-  	}
+var getElementsByClassName = function(className) {
 
-  	element.childNodes.forEach(function(x){
-  		getElementsByClassName(x);
-  	})
+  var nodeList = [];
+  var wholeBody = document.body;
+  
+  function tester(element){
+   
+    if(_(element.classList).contains(className)){
+      nodeList.push(element);
+    }
+   
+   _(element.childNodes).forEach(function(x) {
+    tester(x);
+    //console.log(property);
+    //console.log(element.childNodes[property]);
+   });
   }
-
-  getClassNames(wholeBody);
- 
-  return nodeArray;
-  	//check if it has a class lsit, then check if the element we are looking for .includes() childNode
-  	//classList
-  	  //childNodes
+  tester(wholeBody);
+  console.log(nodeList);
+  return nodeList;
 };
 
-console.log(getElementsByClassName('targetClassName'));
-//console.log(document.getElementsByClassName('targetClassName'));
+c 
+
+//classList is a list of something that contains all the classes 
+//check element.classList > does it have the className? push into the array
+//check element.childNodes > does it have the className(recursively call the function on each nodes)
